@@ -1,14 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import randomize from './Randomize.jsx';
 
-function Title() {
+const Wrapper = styled.div`
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 4em;
+  padding: 0 .4em;
+  margin-bottom: .5em;
+  width: 45%;
+
+
+  span:nth-child(2) { transition: all .2s ease-in-out }
+
+  span:nth-child(2) :hover {
+    color:green;
+    transform: scale(1.1);
+  }
+`;
+
+const Line = styled.span`
+  padding-bottom: .2em;
+`;
+
+const Language = styled.span`
+  padding-bottom: 0em;
+  cursor: pointer;
+  color: purple;
+  border-bottom: 4px solid purple;
+`;
+
+function Title({selection, setId}) {
   return (
-    <div style={{border: '1px solid green'}}>
-      <div> HOW TO </div>
-      <div> SAY </div>
-      <div> HELLO </div>
-      <div> IN ENGLISH ? </div>
-    </div>
+    <Wrapper>
+      <Line> HOW TO </Line>
+      <Line> SAY </Line>
+      <Line> HELLO </Line>
+      <Line> IN </Line>
+      <Language onClick={()=> {setId(randomize())}}> {selection.langname} </Language>
+      <Line> ? </Line>
+    </Wrapper>
   )
 }
 
