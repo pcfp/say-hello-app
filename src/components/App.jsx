@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Title from './Title.jsx';
 import Translation from './Translation.jsx';
@@ -20,13 +19,15 @@ const Nav = styled.nav`
   padding: 3em 1em;
   align-self: flex-start;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 0% 10% 10% 0%;
   font-size: 18px;
-`
+`;
+
 function App() {
   const [id, setId] = useState(Randomize());
   const [selection, setSelection] = useState(languageData[id - 1]);
