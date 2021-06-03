@@ -139,13 +139,13 @@ const BackControls = styled.div`
 `;
 
 
-function Translation({selection}) {
+function Translation({selection, flipped, setFlipped}) {
   const soundUrl = '../audios/' + selection.id + '.mp3';
 
   const [play, { stop }] = useSound(soundUrl, { volume: 1 });
 
   const [click, setClick] = useState(false);
-  const [flipped, setFlipped] = useState(false);
+
 
   return (
     // <div>

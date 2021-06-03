@@ -31,7 +31,7 @@ function App() {
   const [id, setId] = useState(Randomize());
   const [selection, setSelection] = useState(languageData[id - 1]);
   const [menuToggle, setMenuToggle] = useState(false);
-
+  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
     setSelection(languageData[id - 1])
@@ -45,10 +45,10 @@ function App() {
       </Nav>
       <Wrapper>
         <Title selection={selection} setId={setId}/>
-        <Translation selection={selection}/>
+        <Translation selection={selection} flipped={flipped} setFlipped={setFlipped} />
       </Wrapper>
     </Container>
-    <Sidenav menuToggle={menuToggle} setMenuToggle={setMenuToggle} languageData={languageData} setId={setId}/>
+    <Sidenav menuToggle={menuToggle} setMenuToggle={setMenuToggle} languageData={languageData} setId={setId} setFlipped={setFlipped}/>
     </>
   )
 }

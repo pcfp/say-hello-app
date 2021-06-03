@@ -26,7 +26,7 @@ const Language = styled.span`
   padding-bottom: 0em;
   cursor: pointer;
   color: purple;
-  border-bottom: 4px solid purple;
+  border-bottom: 0.4rem solid purple;
 `;
 
 function Title({selection, setId}) {
