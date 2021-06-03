@@ -6,6 +6,7 @@ import Translation from './Translation.jsx';
 import Hamberger from './Hamberger.jsx';
 import languageData from '../../data';
 import Randomize from './Randomize.jsx';
+import Sidenav from './Sidenav.jsx';
 
 const Container = styled.nav`
   width: 90%;
@@ -29,30 +30,26 @@ const Wrapper = styled.div`
 function App() {
   const [id, setId] = useState(Randomize());
   const [selection, setSelection] = useState(languageData[id - 1]);
+  const [menuToggle, setMenuToggle] = useState(false);
 
-  // useEffect(() => {
-  //   setId();
-  // }, []);
 
   useEffect(() => {
     setSelection(languageData[id - 1])
   }, [id]);
 
   return (
+    <>
     <Container>
       <Nav>
-        <Hamberger />
+        <Hamberger menuToggle={menuToggle} setMenuToggle={setMenuToggle}/>
       </Nav>
       <Wrapper>
         <Title selection={selection} setId={setId}/>
         <Translation selection={selection}/>
       </Wrapper>
-      {/* {
-        languageData.forEach((lan) => {
-          console.log(lan.langname)
-        })
-      } */}
     </Container>
+    <Sidenav menuToggle={menuToggle} setMenuToggle={setMenuToggle} languageData={languageData} setId={setId}/>
+    </>
   )
 }
 

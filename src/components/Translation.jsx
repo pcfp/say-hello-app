@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import useSound from 'use-sound';
 
-const Wrapper = styled.div`
-  font-family: 'Roboto', sans-serif;
-  margin-left: 2em;
-  background: #f5f5f5;
-  width: 15em;
-  height: 17em;
-  padding: 2em;
-  border: 2px solid rgba(0,0,0,0.12);
-  box-shadow: 1px 6px 7px rgb(0 0 0 / 10%);
-  display: flex;
+const Card = styled.div`
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  transition: z-index 500ms, transform 500ms;
+  z-index: 0;
+  -webkit-perspective: 1000px; */
+  perspective: 1000px;
+  /* transform-style: preserve-3d; */
+  width: 17em;
+  height: 19em;
+
+  &.flipped {
+    z-index:1;
+  }
+
+  font-family: 'Roboto', sans-serif;
+  /* margin-left: 4em; */
+  padding: 0em 1em 0em 3em;
+
+  span {
+    font-size: 1.8em;
+    height: 1.2em;
+    width: 1.2em;
+    border-radius: 50%;
+  }
+
+  span:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+  }
 
   span.wave {
     animation-name: wave-animation;
@@ -22,7 +39,6 @@ const Wrapper = styled.div`
     animation-iteration-count: 1;
     transform-origin: 70% 70%;
     display: inline-block;
-    font-size: 2em;
   }
 
   @keyframes wave-animation {
@@ -34,25 +50,94 @@ const Wrapper = styled.div`
      50% { transform: rotate(  0.0deg); }
     100% { transform: rotate(  0.0deg); }
   }
-
-
 `;
 
+
+const CardInner = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  transition: transform 500ms;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+
+  &.flipped {
+    transform: translateX(-100%) rotateY(-180deg);
+    /* transform: rotateY(180deg); */
+  }
+`;
+
+const CardSide = css`
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  --moz-backface-visibility: hidden;
+  --webkit-backface-visibility: hidden;
+  border: 2px solid rgba(0,0,0,0.12);
+  box-shadow: 1px 6px 7px rgb(0 0 0 / 10%);
+  background: #f5f5f5;
+`
+
+const CardFront = styled.div`
+  ${CardSide}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* width: 15rem;
+  height: 17rem; */
+  /* padding: 2em; */
+  z-index: 0;
+`;
+
+const CardBack = styled.div`
+  ${CardSide}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* padding: 2em; */
+  /* z-index: 1; */
+  transform: rotateY(180deg);
+
+`
+
 const Result = styled.div`
-  font-color:black;
+  color:black;
   display:flex;
   font-size: 1.5em;
+  padding-top: 1.5rem;
+  padding-left: 1.5rem;
 `;
 
 const Pronounciation = styled.div`
-  font-color:black;
-  padding-top: 0.8em;
+  color:black;
+  padding-top: 0.8rem;
+  padding-left: 1.5rem;
 `;
 
-const Speaker = styled.div`
-  font-color:black;
-  display:flex;
+const BackContent = styled.div`
+  font-family: 'Archivo Black', sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  padding: 1.5rem;
 `;
+
+const FrontControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1.5rem;
+`;
+
+const BackControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1.5rem;
+`;
+
 
 function Translation({selection}) {
   const soundUrl = '../audios/' + selection.id + '.mp3';
@@ -60,25 +145,44 @@ function Translation({selection}) {
   const [play, { stop }] = useSound(soundUrl, { volume: 1 });
 
   const [click, setClick] = useState(false);
+  const [flipped, setFlipped] = useState(false);
 
   return (
-    <div>
-      <Wrapper>
-        <div>
-        <Result> {selection.word} </Result>
-        <Pronounciation> {selection.pronounciation === null ? '' : selection.pronounciation } </Pronounciation>
-        </div>
-        <div>
-        <span className="wave" onClick={() => {
-            if(!click){
-              setClick(true);
-              play();
-              setTimeout(() => {setClick(false);}, 1000);
-            }
-          }}>👋</span>
-      </div>
-      </Wrapper>
-    </div>
+    // <div>
+      <Card>
+        <CardInner className={flipped ? 'flipped' : ''}>
+          <CardFront>
+            <div>
+              <Result> {selection.word} </Result>
+              <Pronounciation> {selection.pronounciation === null ? '' : selection.pronounciation } </Pronounciation>
+            </div>
+            <FrontControls>
+              <span
+                className={click === true ? 'wave' : ''}
+                onClick={() => {
+                  if(!click){
+                    setClick(true);
+                    play();
+                    setTimeout(() => {setClick(false);}, 1000);
+                  }
+                 }}>
+                  👋
+              </span>
+              <span onClick={() => setFlipped(true)}> 👀 </span>
+            </FrontControls>
+          </CardFront>
+          <CardBack>
+            <BackContent>
+              <div style={{ color: '#e63946'}}>Congrats! </div>
+              <div style={{ color: '#161a1d'}}>
+                You now can greet <b>{selection.speakers}</b> millions more people!
+              </div>
+            </BackContent>
+            <BackControls onClick={() => setFlipped(false)}><span> 🔙 </span></BackControls>
+          </CardBack>
+        </CardInner>
+      </Card>
+    // </div>
   )
 }
 

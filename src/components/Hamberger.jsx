@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   height: 6px;
   background: black;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(255,101,47,.2);
+  box-shadow: 0 2px 5px #80736e33;
   transition: all .5s ease-in-out;
   }
   .menu-btn__burger::before,
@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   height: 6px;
   background: black;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(255,101,47,.2);
+  box-shadow: 0 2px 5px #80736e33;
   transition: all .5s ease-in-out;
   }
   .menu-btn__burger::before {
@@ -56,9 +56,7 @@ const Wrapper = styled.div`
   }
 `;
 
-function Hamberger() {
-  const [menuToggle, setMenuToggle] = useState(false);
-
+function Hamberger({setMenuToggle, menuToggle}) {
   return (
     <Wrapper>
       <div className={menuToggle ? "menu-btn open": "menu-btn"} onClick={()=> setMenuToggle(!menuToggle)}>
