@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -42,6 +41,7 @@ const Wrapper = styled.div`
   .menu-btn__burger::after {
   transform: translateY(16px);
   }
+  
   /* ANIMATION */
   .menu-btn.open .menu-btn__burger {
   transform: translateX(-50px);
