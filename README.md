@@ -34,7 +34,7 @@ npm run start
 npm run build
 ```
 
-Now, the page is ready to load at http://localhost:3000/
+Now, the page is ready to load at http://localhost:8080/
 
 ## Requirements
 - Web broswer
