@@ -3,13 +3,7 @@ import styled, { css } from 'styled-components';
 import useSound from 'use-sound';
 
 const Card = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  transition: z-index 500ms, transform 500ms;
-  z-index: 0;
-  -webkit-perspective: 1000px; */
   perspective: 1000px;
-  /* transform-style: preserve-3d; */
   width: 17em;
   height: 19em;
 
@@ -18,7 +12,6 @@ const Card = styled.div`
   }
 
   font-family: 'Roboto', sans-serif;
-  /* margin-left: 4em; */
   padding: 0em 1em 0em 3em;
 
   span {
@@ -52,7 +45,6 @@ const Card = styled.div`
   }
 `;
 
-
 const CardInner = styled.div`
   width: 100%;
   height: 100%;
@@ -64,7 +56,6 @@ const CardInner = styled.div`
 
   &.flipped {
     transform: translateX(-100%) rotateY(-180deg);
-    /* transform: rotateY(180deg); */
   }
 `;
 
@@ -78,16 +69,13 @@ const CardSide = css`
   border: 2px solid rgba(0,0,0,0.12);
   box-shadow: 1px 6px 7px rgb(0 0 0 / 10%);
   background: #f5f5f5;
-`
+`;
 
 const CardFront = styled.div`
   ${CardSide}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* width: 15rem;
-  height: 17rem; */
-  /* padding: 2em; */
   z-index: 0;
 `;
 
@@ -96,8 +84,6 @@ const CardBack = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* padding: 2em; */
-  /* z-index: 1; */
   transform: rotateY(180deg);
 
 `
@@ -141,48 +127,43 @@ const BackControls = styled.div`
 
 function Translation({selection, flipped, setFlipped}) {
   const soundUrl = '../audios/' + selection.id + '.mp3';
-
   const [play, { stop }] = useSound(soundUrl, { volume: 1 });
-
   const [click, setClick] = useState(false);
 
-
   return (
-    // <div>
-      <Card>
-        <CardInner className={flipped ? 'flipped' : ''}>
-          <CardFront>
-            <div>
-              <Result> {selection.word} </Result>
-              <Pronounciation> {selection.pronounciation === null ? '' : selection.pronounciation } </Pronounciation>
-            </div>
-            <FrontControls>
-              <span
-                className={click === true ? 'wave' : ''}
-                onClick={() => {
-                  if(!click){
-                    setClick(true);
-                    play();
-                    setTimeout(() => {setClick(false);}, 1000);
-                  }
-                 }}>
-                  👋
-              </span>
-              <span onClick={() => setFlipped(true)}> 👀 </span>
-            </FrontControls>
-          </CardFront>
-          <CardBack>
-            <BackContent>
-              <div style={{ color: '#e63946'}}>Congrats! </div>
-              <div style={{ color: '#161a1d'}}>
-                You now can greet <b>{selection.speakers}</b> millions more people!
-              </div>
-            </BackContent>
-            <BackControls onClick={() => setFlipped(false)}><span> 🔙 </span></BackControls>
-          </CardBack>
-        </CardInner>
-      </Card>
-    // </div>
+  <Card>
+    <CardInner className={flipped ? 'flipped' : ''}>
+      <CardFront>
+        <div>
+          <Result> {selection.word} </Result>
+          <Pronounciation> {selection.pronounciation === null ? '' : selection.pronounciation } </Pronounciation>
+        </div>
+        <FrontControls>
+          <span
+            className={click === true ? 'wave' : ''}
+            onClick={() => {
+              if(!click){
+                setClick(true);
+                play();
+                setTimeout(() => {setClick(false);}, 1000);
+              }
+              }}>
+              👋
+          </span>
+          <span onClick={() => setFlipped(true)}> 👀 </span>
+        </FrontControls>
+      </CardFront>
+      <CardBack>
+        <BackContent>
+          <div style={{ color: '#e63946'}}>Congrats! </div>
+          <div style={{ color: '#161a1d'}}>
+            You now can greet <b>{selection.speakers}</b> millions more people!
+          </div>
+        </BackContent>
+        <BackControls onClick={() => setFlipped(false)}><span> 🔙 </span></BackControls>
+      </CardBack>
+    </CardInner>
+  </Card>
   )
 }
 
