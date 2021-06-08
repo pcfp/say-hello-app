@@ -54,7 +54,7 @@ const Language = styled.div`
   }
 `;
 
-function Title({selection, setId}) {
+function Title({selection, setId, setFlipped}) {
   return (
     <Wrapper>
       <Line> HOW </Line>
@@ -62,7 +62,7 @@ function Title({selection, setId}) {
       <Line> SAY </Line>
       <Line> HELLO </Line>
       <Line> IN </Line>
-      <Language onClick={()=> {setId(randomize())}}><a className="left"> {selection.langname} </a></Language>
+      <Language onClick={()=> {setId(randomize()); setFlipped(false); }}><a className="left"> {selection.langname} </a></Language>
       <Line> ? </Line>
     </Wrapper>
   )

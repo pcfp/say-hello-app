@@ -45,7 +45,7 @@ function App() {
         <Hamberger menuToggle={menuToggle} setMenuToggle={setMenuToggle}/>
       </Nav>
       <Wrapper>
-        <Title selection={selection} setId={setId}/>
+        <Title selection={selection} setId={setId} setFlipped={setFlipped}/>
         <Translation selection={selection} flipped={flipped} setFlipped={setFlipped} />
       </Wrapper>
     </Container>
