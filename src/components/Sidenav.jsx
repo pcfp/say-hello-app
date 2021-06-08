@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: 100%;
+  height: 90%;
   width: 0;
   position: fixed;
   z-index: 1;
@@ -24,6 +24,7 @@ const Lan = styled.div`
   padding-left: 1em;
   a.left
   {
+    cursor: pointer;
     position: relative;
   }
 
