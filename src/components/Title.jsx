@@ -8,9 +8,13 @@ const Wrapper = styled.div`
   padding: 0 .4em;
   margin-bottom: .5em;
   width: 45%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-
-  span:nth-child(2) { transition: all .2s ease-in-out }
+  span:nth-child(2) {
+    transition: all .2s ease-in-out
+  }
 
   span:nth-child(2) :hover {
     color:green;
@@ -19,24 +23,46 @@ const Wrapper = styled.div`
 `;
 
 const Line = styled.span`
-  padding-bottom: .2em;
+  padding-bottom: 0.1em;
+  padding-right: 0.3em;
 `;
 
-const Language = styled.span`
-  padding-bottom: 0em;
+const Language = styled.div`
+  padding-bottom: 0.1em;
+  padding-right: 0.2em;
   cursor: pointer;
   color: purple;
-  border-bottom: 0.4rem solid purple;
+  /* border-bottom: 0.4rem solid purple; */
+  a.left {
+    position: relative;
+  }
+  a.left:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0.4rem;
+    bottom: 0;
+    left: 0;
+    background-color: purple;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a.left:hover:before{
+    visibility: visible;
+    width: 100%;
+  }
 `;
 
 function Title({selection, setId}) {
   return (
     <Wrapper>
-      <Line> HOW TO </Line>
+      <Line> HOW </Line>
+      <Line> TO </Line>
       <Line> SAY </Line>
       <Line> HELLO </Line>
       <Line> IN </Line>
-      <Language onClick={()=> {setId(randomize())}}> {selection.langname} </Language>
+      <Language onClick={()=> {setId(randomize())}}><a className="left"> {selection.langname} </a></Language>
       <Line> ? </Line>
     </Wrapper>
   )
