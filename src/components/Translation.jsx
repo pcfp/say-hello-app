@@ -67,7 +67,11 @@ const CardSide = css`
   --moz-backface-visibility: hidden;
   --webkit-backface-visibility: hidden;
   border: 2px solid rgba(0,0,0,0.12);
-  box-shadow: 1px 6px 7px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12),
+              0 2px 2px rgba(0,0,0,0.12),
+              0 4px 4px rgba(0,0,0,0.12),
+              0 8px 8px rgba(0,0,0,0.12),
+              0 16px 16px rgba(0,0,0,0.12);
   background: #f5f5f5;
 `;
 
