@@ -9,7 +9,7 @@
     "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
     "start": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config webpack.config.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
